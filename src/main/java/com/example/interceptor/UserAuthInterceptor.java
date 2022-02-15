@@ -55,7 +55,7 @@ public class UserAuthInterceptor implements HandlerInterceptor {
                 return value.substring(type.length()).trim();
             }
         }
-        
+
         return "";
     }
 

@@ -8,12 +8,13 @@ spring:
         format_sql: true
     hibernate:
       ddl-auto: create
+    database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/websoketTest
-    username: postgres
-    password: 0000
+    url: jdbc:postgresql://localhost:5432/websocketTest
+    username: admin_js
+    password: admin_js
 logging:
   level:
     org:
@@ -22,3 +23,5 @@ logging:
           client: DEBUG
       hibernate:
         type: TRACE
+swagger:
+  show: true

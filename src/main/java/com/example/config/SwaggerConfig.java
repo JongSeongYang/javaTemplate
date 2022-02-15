@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -20,7 +22,7 @@ import java.util.List;
 @Configuration
 @EnableSwagger2
 @Profile("!production")
-public class SwaggerConfig {
+public class SwaggerConfig extends WebMvcConfigurationSupport {
 
     @Value("${swagger.show}")
     boolean isShow;
@@ -33,18 +35,18 @@ public class SwaggerConfig {
                 .securityContexts(Arrays.asList(securityContext()))
                 .securitySchemes(Arrays.asList(apiKey()))
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.globalorder.btrips.server"))
+                .apis(RequestHandlerSelectors.basePackage("com.example.api.server"))
                 .paths(PathSelectors.any())
                 .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("BTR API")
-                .description("BTR Token Description of API")
+                .title("TEST API")
+                .description("Test Description of API")
                 .version("0.0.1")
                 .termsOfServiceUrl("Terms of service")
-                .contact(new Contact("Btrips Dev Team", "", "dev@hiandd.co.kr"))
+                .contact(new Contact("000 Dev Team", "", "yangjs0523@naver.com"))
                 .license("Apache License Version 2.0")
                 .licenseUrl("https://www.apache.org/licenses/LICENSE-2.0")
                 .extensions(Collections.emptyList())
@@ -66,4 +68,9 @@ public class SwaggerConfig {
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
     }
 
+    @Override
+    protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/swagger-ui/**").addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/");
+    }
 }

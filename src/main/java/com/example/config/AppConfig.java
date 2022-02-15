@@ -27,15 +27,4 @@ public class AppConfig {
 
     @Bean
     public OkHttpClient okHttpClient() { return new OkHttpClient();}
-
-    @Value("${octet.base-url")
-    @Getter
-    @Setter
-    private String octetBaseUrl;
-
-    @Value("${octet.create-child-address")
-    @Getter
-    @Setter
-    private String octetCreateChildAddress;
-
 }
